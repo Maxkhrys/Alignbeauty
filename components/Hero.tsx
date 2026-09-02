@@ -39,7 +39,7 @@ export function Hero() {
               style={{ objectPosition: "50% 28%" }}
             />
             <Wordmark
-              className="absolute left-[35%] top-[40%] z-[1] -translate-x-1/2 -translate-y-1/2 text-taupe/70"
+              className="absolute left-[35%] top-[40%] z-[1] -translate-x-1/2 -translate-y-1/2 text-ink/65"
               size="clamp(1.7rem, 3vw, 3.8rem)"
             />
           </motion.div>
