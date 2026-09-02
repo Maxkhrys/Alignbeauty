@@ -10,16 +10,14 @@ import { Arrow } from "./ui/Arrow";
  * Desktop panel. The parallelogram is a clip-path so the <img> inside is never
  * skewed — the shape leans, the photograph stays true.
  *
- * The photograph occupies only the TOP of the panel and the copy sits on solid
- * espresso below it. That is what the moodboard does, and it is also what keeps
- * the images sharp: a full-height photo in a 1:4 panel would have to be scaled
- * ~2.4x to cover, magnifying a narrow slice of the source into a blurry crop.
- * Constraining it to a ~1.7:1 box means each source is used at close to its
- * natural scale, and the gradient hides the seam.
+ * Panels overlap by their transparent clipped corners. This creates the steep,
+ * narrow cream gutters in the reference without skewing or counter-skewing the
+ * photographs, so image pixels stay crisp.
  */
-const LEAN = 15;
+const LEAN = 38;
 const clip = `polygon(${LEAN}% 0%, 100% 0%, ${100 - LEAN}% 100%, 0% 100%)`;
-const PHOTO_HEIGHT = "68%";
+const PANEL_WIDTH = 38;
+const PANEL_STEP = 26;
 
 export function HeroServicePanel({
   service,
@@ -41,7 +39,8 @@ export function HeroServicePanel({
         delay: reduced ? 0 : 0.55 + index * 0.13,
         ease: [0.22, 0.61, 0.36, 1],
       }}
-      className="relative h-full flex-1"
+      className="absolute inset-y-0"
+      style={{ left: `${index * PANEL_STEP}%`, width: `${PANEL_WIDTH}%` }}
     >
       <Link
         href={service.href}
@@ -49,26 +48,26 @@ export function HeroServicePanel({
         className="group relative block h-full w-full overflow-hidden bg-ink"
         style={{ clipPath: clip, WebkitClipPath: clip }}
       >
-        <span className="absolute inset-x-0 top-0 block" style={{ height: PHOTO_HEIGHT }}>
+        <span className="absolute inset-0 block">
           <Image
             src={service.image}
             alt={service.alt}
             fill
             sizes={sizes}
-            quality={90}
+            unoptimized
             className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-align)]
               group-hover:scale-[1.045] motion-reduce:group-hover:scale-100"
             style={{ objectPosition: service.position }}
           />
-          {/* Fades the photo into the espresso below it, so the split is invisible. */}
+          {/* One continuous photograph, darkened only where copy needs contrast. */}
           <span
             aria-hidden="true"
-            className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink via-ink/75 to-transparent"
+            className="absolute inset-0 bg-gradient-to-b from-transparent from-[27%] via-ink/45 via-[58%] to-ink to-[88%]"
           />
         </span>
 
         {/* Copy sits inside the lean, clear of the slanted edges. */}
-        <span className="absolute inset-x-0 bottom-0 flex flex-col px-[15%] pb-[9%] text-cream">
+        <span className="absolute bottom-0 left-0 flex w-[55%] flex-col pb-[8%] pl-[18%] pr-[2%] text-cream">
           <span className="u-display text-[clamp(1.6rem,2.3vw,3rem)] leading-none text-cream/95">
             {service.index}
           </span>
@@ -126,7 +125,7 @@ export function ServiceCardMobile({ service, index }: { service: Service; index:
             alt={service.alt}
             fill
             sizes="(max-width: 640px) 45vw, 240px"
-            quality={80}
+            unoptimized
             className="object-cover"
             style={{ objectPosition: service.positionMobile ?? service.position }}
           />

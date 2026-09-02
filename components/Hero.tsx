@@ -7,7 +7,9 @@ import { marquee, services, site } from "@/lib/site";
 import { AnimatedText } from "./ui/AnimatedText";
 import { Reveal } from "./ui/Reveal";
 import { Button } from "./ui/Button";
-import { HeroServicePanel, ServiceCardMobile } from "./HeroServicePanel";
+import { Wordmark } from "./ui/Wordmark";
+import { HeroServicePanel } from "./HeroServicePanel";
+import { MobileHero } from "./MobileHero";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -19,23 +21,29 @@ export function Hero() {
   const backdropY = useTransform(scrollYProgress, [0, 1], ["0%", reduced ? "0%" : "9%"]);
 
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden bg-cream pt-24 lg:pt-28">
-      <div className="relative">
+    <section id="top" ref={ref} className="relative overflow-hidden bg-cream">
+      <MobileHero />
+
+      <div className="relative hidden pt-28 lg:block">
         {/* Anchored to the section rather than the grid column, so the
             photograph reads as one continuous field running off the right of
             the screen instead of a boxed-in image with a hard left seam. */}
-        <div className="absolute inset-y-0 right-0 hidden w-[93%] overflow-hidden lg:block">
+        <div className="absolute inset-y-0 right-0 hidden w-[88%] overflow-hidden lg:block">
           <motion.div style={{ y: backdropY }} className="absolute -inset-y-[6%] inset-x-0">
             <Image
-              src="/images/hero-backdrop.jpg"
+              src="/images/hero-backdrop-v3.webp"
               alt="The Align Beauty Lounge reception — a lit arched alcove above a marble counter"
               fill
               priority
               fetchPriority="high"
-              quality={92}
-              sizes="93vw"
+              unoptimized
+              sizes="88vw"
               className="object-cover"
               style={{ objectPosition: "50% 28%" }}
+            />
+            <Wordmark
+              className="absolute left-[35%] top-[40%] z-[1] -translate-x-1/2 -translate-y-1/2 text-ink/65"
+              size="clamp(1.7rem, 3vw, 3.8rem)"
             />
           </motion.div>
 
@@ -52,9 +60,9 @@ export function Hero() {
         </div>
 
         <div className="shell relative">
-          <div className="grid items-center gap-10 lg:grid-cols-[minmax(19rem,40%)_1fr] lg:gap-6 xl:gap-10">
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(19rem,38%)_1fr] lg:gap-6 xl:gap-8">
           {/* ---------------- Copy column ---------------- */}
-          <div className="relative z-10 lg:py-20 xl:py-24">
+          <div className="relative z-10 lg:py-16 xl:py-20">
             <Reveal immediate delay={0.15} y={14}>
               <p className="u-label text-ink/60">A new chapter begins.</p>
             </Reveal>
@@ -107,14 +115,14 @@ export function Hero() {
             className="relative hidden lg:block"
             style={{ marginRight: "calc(-1 * var(--spacing-gutter))" }}
           >
-            <div className="relative aspect-[16/13] w-full xl:aspect-[16/12]">
-              <div className="absolute -top-[5%] bottom-[-1%] left-[6%] right-0 flex gap-[1.3%]">
+            <div className="relative aspect-[16/10.6] w-full xl:aspect-[16/10.2]">
+              <div className="absolute inset-y-0 left-[6%] right-0">
                 {services.map((s, i) => (
                   <HeroServicePanel
                     key={s.index}
                     service={s}
                     index={i}
-                    sizes="(min-width: 1920px) 20vw, (min-width: 1280px) 21vw, 22vw"
+                    sizes="(min-width: 1920px) 25vw, (min-width: 1280px) 27vw, 29vw"
                   />
                 ))}
               </div>
@@ -122,13 +130,6 @@ export function Hero() {
           </div>
           </div>
         </div>
-      </div>
-
-      {/* ---------------- Service cards (below lg) ---------------- */}
-      <div className="gutter mt-12 flex flex-col gap-3 lg:hidden">
-        {services.map((s, i) => (
-          <ServiceCardMobile key={s.index} service={s} index={i} />
-        ))}
       </div>
 
       {/* Oversized wordmark set into the floor, as in the moodboard. Purely

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
 import { nav, site } from "@/lib/site";
 import { Wordmark } from "./ui/Wordmark";
 import { MobileMenu } from "./MobileMenu";
@@ -10,7 +9,6 @@ import { MobileMenu } from "./MobileMenu";
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const reduced = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -21,18 +19,17 @@ export function Header() {
 
   return (
     <>
-      <motion.header
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: reduced ? 0 : 1.1, delay: reduced ? 0 : 0.15 }}
+      <header
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-[var(--ease-align)]
-          ${scrolled && !open ? "border-b border-taupe/25 bg-cream/95" : "border-b border-transparent"}`}
+          ${scrolled && !open
+            ? "border-b border-taupe/25 bg-cream/95 text-ink"
+            : "border-b border-transparent text-cream lg:text-ink"}`}
       >
         <div className="shell flex items-center justify-between gap-6 py-4 md:py-5">
           <Link
             href="#top"
             aria-label={`${site.fullName} — home`}
-            className="flex min-h-11 shrink-0 items-center text-ink"
+            className="flex min-h-11 shrink-0 items-center"
           >
             <Wordmark size="clamp(1.1rem, 1.6vw, 1.4rem)" />
           </Link>
@@ -67,7 +64,7 @@ export function Header() {
               aria-label="Open menu"
               aria-expanded={open}
               aria-controls="mobile-menu"
-              className="grid size-11 place-items-center text-ink lg:hidden"
+              className="grid size-11 place-items-center lg:hidden"
             >
               <span aria-hidden="true" className="flex w-6 flex-col gap-[5px]">
                 <span className="h-px w-full bg-current" />
@@ -77,7 +74,7 @@ export function Header() {
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       <MobileMenu id="mobile-menu" open={open} onClose={() => setOpen(false)} />
     </>

@@ -59,10 +59,10 @@ export function MoreThanBeauty() {
           >
             <motion.div style={{ y }} className="absolute -inset-y-[6%] inset-x-0">
               <Image
-                src="/images/lounge.jpg"
+                src="/images/lounge-v2.webp"
                 alt="The Align Beauty Lounge waiting area — curved seating beneath the backlit ALIGN sign"
                 fill
-                quality={88}
+                unoptimized
                 sizes="(min-width: 1024px) 46vw, 100vw"
                 className="object-cover"
                 style={{ objectPosition: "58% 50%" }}

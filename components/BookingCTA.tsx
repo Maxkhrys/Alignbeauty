@@ -14,11 +14,11 @@ export function BookingCTA() {
           {/* Photograph anchored right; copy always sits on solid espresso. */}
           <div className="absolute inset-y-0 right-0 w-full sm:w-[58%] lg:w-[52%]">
             <Image
-              src="/images/lounge.jpg"
+              src="/images/lounge-v2.webp"
               alt=""
               aria-hidden="true"
               fill
-              quality={80}
+              unoptimized
               sizes="(min-width: 640px) 55vw, 100vw"
               className="object-cover"
               style={{ objectPosition: "35% 55%" }}
