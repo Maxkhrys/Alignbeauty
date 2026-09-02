@@ -107,14 +107,14 @@ export function Hero() {
             className="relative hidden lg:block"
             style={{ marginRight: "calc(-1 * var(--spacing-gutter))" }}
           >
-            <div className="relative aspect-[16/11.5] w-full xl:aspect-[16/11]">
-              <div className="absolute inset-y-0 left-[-3%] right-0">
+            <div className="relative aspect-[16/10.6] w-full xl:aspect-[16/10.2]">
+              <div className="absolute inset-y-0 left-[6%] right-0">
                 {services.map((s, i) => (
                   <HeroServicePanel
                     key={s.index}
                     service={s}
                     index={i}
-                    sizes="(min-width: 1920px) 20vw, (min-width: 1280px) 21vw, 22vw"
+                    sizes="(min-width: 1920px) 25vw, (min-width: 1280px) 27vw, 29vw"
                   />
                 ))}
               </div>

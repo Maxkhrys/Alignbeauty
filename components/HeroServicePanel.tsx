@@ -14,10 +14,10 @@ import { Arrow } from "./ui/Arrow";
  * narrow cream gutters in the reference without skewing or counter-skewing the
  * photographs, so image pixels stay crisp.
  */
-const LEAN = 50;
+const LEAN = 38;
 const clip = `polygon(${LEAN}% 0%, 100% 0%, ${100 - LEAN}% 100%, 0% 100%)`;
-const PANEL_WIDTH = 46;
-const PANEL_STEP = 27;
+const PANEL_WIDTH = 38;
+const PANEL_STEP = 26;
 
 export function HeroServicePanel({
   service,
@@ -67,7 +67,7 @@ export function HeroServicePanel({
         </span>
 
         {/* Copy sits inside the lean, clear of the slanted edges. */}
-        <span className="absolute bottom-0 left-0 flex w-[52%] flex-col pb-[8%] pl-[10%] pr-[2%] text-cream">
+        <span className="absolute bottom-0 left-0 flex w-[55%] flex-col pb-[8%] pl-[18%] pr-[2%] text-cream">
           <span className="u-display text-[clamp(1.6rem,2.3vw,3rem)] leading-none text-cream/95">
             {service.index}
           </span>
