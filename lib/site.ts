@@ -44,8 +44,11 @@ export type Service = {
   statement: string[];
   image: string;
   alt: string;
-  /* object-position tuned per image so no face or focal point gets cropped. */
+  /* object-position tuned per image so no face or focal point gets cropped.
+     The desktop panels crop to a portrait box, the mobile cards to a near
+     square, so the two need different framing. */
   position: string;
+  positionMobile?: string;
   href: string;
 };
 
@@ -57,7 +60,8 @@ export const services: Service[] = [
     statement: ["Details that", "define you."],
     image: "/images/nails.jpg",
     alt: "Close-up of a hand with a soft natural almond-shaped manicure resting on marble",
-    position: "58% 45%",
+    position: "45% 42%",
+    positionMobile: "52% 46%",
     href: "#services",
   },
   {
@@ -67,7 +71,8 @@ export const services: Service[] = [
     statement: ["Enhance your", "natural beauty."],
     image: "/images/beauty.jpg",
     alt: "Portrait of a woman with softly defined brows and a warm glowing makeup finish",
-    position: "50% 32%",
+    position: "50% 20%",
+    positionMobile: "50% 24%",
     href: "#services",
   },
   {
@@ -77,7 +82,8 @@ export const services: Service[] = [
     statement: ["Learn. Celebrate.", "Elevate."],
     image: "/images/academy.jpg",
     alt: "The Align Beauty Lounge treatment floor, lit shelving and brass manicure stations",
-    position: "62% 50%",
+    position: "58% 44%",
+    positionMobile: "56% 48%",
     href: "#academy",
   },
 ];

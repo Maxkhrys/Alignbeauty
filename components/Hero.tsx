@@ -19,9 +19,40 @@ export function Hero() {
   const backdropY = useTransform(scrollYProgress, [0, 1], ["0%", reduced ? "0%" : "9%"]);
 
   return (
-    <section id="top" ref={ref} className="relative bg-cream pt-24 lg:pt-28">
-      <div className="shell">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(19rem,38%)_1fr] lg:gap-12 xl:gap-16">
+    <section id="top" ref={ref} className="relative overflow-hidden bg-cream pt-24 lg:pt-28">
+      <div className="relative">
+        {/* Anchored to the section rather than the grid column, so the
+            photograph reads as one continuous field running off the right of
+            the screen instead of a boxed-in image with a hard left seam. */}
+        <div className="absolute inset-y-0 right-0 hidden w-[93%] overflow-hidden lg:block">
+          <motion.div style={{ y: backdropY }} className="absolute -inset-y-[6%] inset-x-0">
+            <Image
+              src="/images/hero-backdrop.jpg"
+              alt="The Align Beauty Lounge reception — a lit arched alcove above a marble counter"
+              fill
+              priority
+              fetchPriority="high"
+              quality={92}
+              sizes="93vw"
+              className="object-cover"
+              style={{ objectPosition: "50% 28%" }}
+            />
+          </motion.div>
+
+          {/* Blend the photograph's left and bottom edges into the page so it
+              reads as a field, not a pasted-in rectangle. */}
+          <span
+            aria-hidden="true"
+            className="absolute inset-y-0 left-0 w-[32%] bg-gradient-to-r from-cream via-cream/88 to-transparent"
+          />
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-[12%] bg-gradient-to-t from-cream to-transparent"
+          />
+        </div>
+
+        <div className="shell relative">
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(19rem,40%)_1fr] lg:gap-6 xl:gap-10">
           {/* ---------------- Copy column ---------------- */}
           <div className="relative z-10 lg:py-20 xl:py-24">
             <Reveal immediate delay={0.15} y={14}>
@@ -69,35 +100,26 @@ export function Hero() {
             </Reveal>
           </div>
 
-          {/* ---------------- Visual column (lg and up) ---------------- */}
-          <div className="relative hidden lg:block">
-            <div className="relative aspect-[16/11] w-full overflow-hidden xl:aspect-[16/10]">
-              <motion.div style={{ y: backdropY }} className="absolute -inset-y-[6%] inset-x-0">
-                <Image
-                  src="/images/hero-backdrop.jpg"
-                  alt="The Align Beauty Lounge reception — a lit arched alcove above a marble counter"
-                  fill
-                  priority
-                  fetchPriority="high"
-                  quality={92}
-                  sizes="(min-width: 1536px) 60vw, 62vw"
-                  className="object-cover"
-                  style={{ objectPosition: "40% 50%" }}
-                />
-              </motion.div>
-
-              {/* Diagonal service panels, overlaying the right of the backdrop. */}
-              <div className="absolute inset-y-[7%] right-0 flex w-[78%] gap-[1.4%]">
+          {/* ---------------- Diagonal panels (lg and up) ----------------
+              They stand taller than the backdrop and run off the right edge of
+              the screen, exactly as they do in the moodboard. */}
+          <div
+            className="relative hidden lg:block"
+            style={{ marginRight: "calc(-1 * var(--spacing-gutter))" }}
+          >
+            <div className="relative aspect-[16/13] w-full xl:aspect-[16/12]">
+              <div className="absolute -top-[5%] bottom-[-1%] left-[6%] right-0 flex gap-[1.3%]">
                 {services.map((s, i) => (
                   <HeroServicePanel
                     key={s.index}
                     service={s}
                     index={i}
-                    sizes="(min-width: 1536px) 17vw, 16vw"
+                    sizes="(min-width: 1920px) 20vw, (min-width: 1280px) 21vw, 22vw"
                   />
                 ))}
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -108,6 +130,17 @@ export function Hero() {
           <ServiceCardMobile key={s.index} service={s} index={i} />
         ))}
       </div>
+
+      {/* Oversized wordmark set into the floor, as in the moodboard. Purely
+          decorative — the real one is in the header. */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-[5%] left-0 hidden select-none
+          u-wordmark whitespace-nowrap text-[10vw] leading-none text-taupe/[0.11] lg:block"
+        style={{ paddingLeft: "var(--spacing-gutter)" }}
+      >
+        Align
+      </span>
 
       {/* ---------------- Service word list ---------------- */}
       <Reveal y={14} className="mt-12 border-y border-taupe/30 bg-champagne/40 lg:mt-16">

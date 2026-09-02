@@ -9,10 +9,17 @@ import { Arrow } from "./ui/Arrow";
 /*
  * Desktop panel. The parallelogram is a clip-path so the <img> inside is never
  * skewed — the shape leans, the photograph stays true.
- *   --lean is the horizontal offset of the top edge, as a % of panel width.
+ *
+ * The photograph occupies only the TOP of the panel and the copy sits on solid
+ * espresso below it. That is what the moodboard does, and it is also what keeps
+ * the images sharp: a full-height photo in a 1:4 panel would have to be scaled
+ * ~2.4x to cover, magnifying a narrow slice of the source into a blurry crop.
+ * Constraining it to a ~1.7:1 box means each source is used at close to its
+ * natural scale, and the gradient hides the seam.
  */
-const LEAN = 16;
+const LEAN = 15;
 const clip = `polygon(${LEAN}% 0%, 100% 0%, ${100 - LEAN}% 100%, 0% 100%)`;
+const PHOTO_HEIGHT = "68%";
 
 export function HeroServicePanel({
   service,
@@ -42,30 +49,31 @@ export function HeroServicePanel({
         className="group relative block h-full w-full overflow-hidden bg-ink"
         style={{ clipPath: clip, WebkitClipPath: clip }}
       >
-        <Image
-          src={service.image}
-          alt={service.alt}
-          fill
-          sizes={sizes}
-          quality={88}
-          className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-align)]
-            group-hover:scale-[1.045] motion-reduce:group-hover:scale-100"
-          style={{ objectPosition: service.position }}
-        />
+        <span className="absolute inset-x-0 top-0 block" style={{ height: PHOTO_HEIGHT }}>
+          <Image
+            src={service.image}
+            alt={service.alt}
+            fill
+            sizes={sizes}
+            quality={90}
+            className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-align)]
+              group-hover:scale-[1.045] motion-reduce:group-hover:scale-100"
+            style={{ objectPosition: service.position }}
+          />
+          {/* Fades the photo into the espresso below it, so the split is invisible. */}
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink via-ink/75 to-transparent"
+          />
+        </span>
 
-        {/* Legibility scrim. Weighted low so the image reads at the top. */}
-        <span
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-ink via-ink/72 via-38% to-transparent to-72%"
-        />
-
-        {/* The panel content sits inside the lean, padded off the slanted edge. */}
+        {/* Copy sits inside the lean, clear of the slanted edges. */}
         <span className="absolute inset-x-0 bottom-0 flex flex-col px-[15%] pb-[9%] text-cream">
-          <span className="u-display text-[clamp(1.5rem,2.1vw,2.6rem)] leading-none text-cream/95">
+          <span className="u-display text-[clamp(1.6rem,2.3vw,3rem)] leading-none text-cream/95">
             {service.index}
           </span>
 
-          <span className="u-display mt-3 text-[clamp(1rem,1.3vw,1.6rem)] uppercase leading-[1.05] tracking-[0.06em]">
+          <span className="u-display mt-2.5 text-[clamp(1.05rem,1.45vw,1.85rem)] uppercase leading-[1.05] tracking-[0.05em]">
             {service.titleLines.map((l) => (
               <span key={l} className="block">
                 {l}
@@ -73,9 +81,9 @@ export function HeroServicePanel({
             ))}
           </span>
 
-          <span className="u-rule mt-4 w-8 origin-left transition-[width] duration-700 ease-[var(--ease-align)] group-hover:w-16" />
+          <span className="u-rule mt-3.5 w-8 origin-left transition-[width] duration-700 ease-[var(--ease-align)] group-hover:w-16" />
 
-          <span className="u-label mt-3.5 text-[0.6875rem] leading-[1.5] text-cream/80">
+          <span className="u-label mt-3.5 text-[0.6875rem] leading-[1.55] text-cream/80">
             {service.statement.map((l) => (
               <span key={l} className="block">
                 {l}
@@ -83,7 +91,7 @@ export function HeroServicePanel({
             ))}
           </span>
 
-          <Arrow className="mt-5 w-8 text-cream/80 transition-transform duration-500 ease-[var(--ease-align)] group-hover:translate-x-2" />
+          <Arrow className="mt-5 w-9 text-cream/80 transition-transform duration-500 ease-[var(--ease-align)] group-hover:translate-x-2" />
         </span>
       </Link>
     </motion.div>
@@ -117,10 +125,10 @@ export function ServiceCardMobile({ service, index }: { service: Service; index:
             src={service.image}
             alt={service.alt}
             fill
-            sizes="(max-width: 640px) 40vw, 200px"
+            sizes="(max-width: 640px) 45vw, 240px"
             quality={80}
             className="object-cover"
-            style={{ objectPosition: service.position }}
+            style={{ objectPosition: service.positionMobile ?? service.position }}
           />
         </div>
 
