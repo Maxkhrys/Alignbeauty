@@ -7,6 +7,7 @@ import { marquee, services, site } from "@/lib/site";
 import { AnimatedText } from "./ui/AnimatedText";
 import { Reveal } from "./ui/Reveal";
 import { Button } from "./ui/Button";
+import { Wordmark } from "./ui/Wordmark";
 import { HeroServicePanel, ServiceCardMobile } from "./HeroServicePanel";
 
 export function Hero() {
@@ -27,7 +28,7 @@ export function Hero() {
         <div className="absolute inset-y-0 right-0 hidden w-[88%] overflow-hidden lg:block">
           <motion.div style={{ y: backdropY }} className="absolute -inset-y-[6%] inset-x-0">
             <Image
-              src="/images/hero-backdrop-v2.webp"
+              src="/images/hero-backdrop-v3.webp"
               alt="The Align Beauty Lounge reception — a lit arched alcove above a marble counter"
               fill
               priority
@@ -36,6 +37,10 @@ export function Hero() {
               sizes="88vw"
               className="object-cover"
               style={{ objectPosition: "50% 28%" }}
+            />
+            <Wordmark
+              className="absolute left-[35%] top-[40%] z-[1] -translate-x-1/2 -translate-y-1/2 text-taupe/70"
+              size="clamp(1.7rem, 3vw, 3.8rem)"
             />
           </motion.div>
 
