@@ -24,16 +24,16 @@ export function Hero() {
         {/* Anchored to the section rather than the grid column, so the
             photograph reads as one continuous field running off the right of
             the screen instead of a boxed-in image with a hard left seam. */}
-        <div className="absolute inset-y-0 right-0 hidden w-[93%] overflow-hidden lg:block">
+        <div className="absolute inset-y-0 right-0 hidden w-[88%] overflow-hidden lg:block">
           <motion.div style={{ y: backdropY }} className="absolute -inset-y-[6%] inset-x-0">
             <Image
-              src="/images/hero-backdrop.jpg"
+              src="/images/hero-backdrop-v2.webp"
               alt="The Align Beauty Lounge reception — a lit arched alcove above a marble counter"
               fill
               priority
               fetchPriority="high"
-              quality={92}
-              sizes="93vw"
+              unoptimized
+              sizes="88vw"
               className="object-cover"
               style={{ objectPosition: "50% 28%" }}
             />

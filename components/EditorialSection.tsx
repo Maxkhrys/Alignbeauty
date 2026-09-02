@@ -22,10 +22,10 @@ export function EditorialSection() {
         <div ref={ref} className="relative aspect-[3/4] w-full overflow-hidden sm:aspect-[16/9] lg:aspect-[21/9]">
           <motion.div style={{ y }} className="absolute -inset-y-[7%] inset-x-0">
             <Image
-              src="/images/hero-backdrop.jpg"
+              src="/images/hero-backdrop-v2.webp"
               alt="The lit arched alcove and marble counter at Align Beauty Lounge"
               fill
-              quality={90}
+              unoptimized
               sizes="100vw"
               className="object-cover"
               style={{ objectPosition: "45% 50%" }}
@@ -43,7 +43,7 @@ export function EditorialSection() {
               className="u-display max-w-[18ch] text-[length:var(--step-h3)] uppercase text-cream"
             />
             <Reveal delay={0.24} y={10}>
-              <p className="u-label mt-5 text-cream/70">Arklow &middot; Co. Wicklow</p>
+              <p className="u-label mt-5 text-cream/70">Mayo &middot; Co. Mayo</p>
             </Reveal>
           </div>
         </div>

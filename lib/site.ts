@@ -20,7 +20,7 @@ export const site = {
     phoneHref: "tel:+353871234567",
     email: "hello@alignbeautylounge.ie",
     emailHref: "mailto:hello@alignbeautylounge.ie",
-    address: "Arklow, Co. Wicklow",
+    address: "Mayo, Co. Mayo",
   },
 
   social: [
@@ -69,10 +69,10 @@ export const services: Service[] = [
     title: "Beauty",
     titleLines: ["Beauty"],
     statement: ["Enhance your", "natural beauty."],
-    image: "/images/beauty-v2.webp",
-    alt: "Portrait of a woman with softly defined brows and a warm glowing makeup finish",
-    position: "50% 42%",
-    positionMobile: "50% 37%",
+    image: "/images/beauty-v3.webp",
+    alt: "Candid three-quarter portrait of a woman with softly defined brows and warm natural makeup",
+    position: "50% 38%",
+    positionMobile: "50% 34%",
     href: "#services",
   },
   {

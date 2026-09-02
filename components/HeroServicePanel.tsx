@@ -54,7 +54,7 @@ export function HeroServicePanel({
             alt={service.alt}
             fill
             sizes={sizes}
-            quality={92}
+            unoptimized
             className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-align)]
               group-hover:scale-[1.045] motion-reduce:group-hover:scale-100"
             style={{ objectPosition: service.position }}
@@ -125,7 +125,7 @@ export function ServiceCardMobile({ service, index }: { service: Service; index:
             alt={service.alt}
             fill
             sizes="(max-width: 640px) 45vw, 240px"
-            quality={80}
+            unoptimized
             className="object-cover"
             style={{ objectPosition: service.positionMobile ?? service.position }}
           />
