@@ -8,7 +8,8 @@ import { AnimatedText } from "./ui/AnimatedText";
 import { Reveal } from "./ui/Reveal";
 import { Button } from "./ui/Button";
 import { Wordmark } from "./ui/Wordmark";
-import { HeroServicePanel, ServiceCardMobile } from "./HeroServicePanel";
+import { HeroServicePanel } from "./HeroServicePanel";
+import { MobileHero } from "./MobileHero";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -20,8 +21,10 @@ export function Hero() {
   const backdropY = useTransform(scrollYProgress, [0, 1], ["0%", reduced ? "0%" : "9%"]);
 
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden bg-cream pt-24 lg:pt-28">
-      <div className="relative">
+    <section id="top" ref={ref} className="relative overflow-hidden bg-cream">
+      <MobileHero />
+
+      <div className="relative hidden pt-28 lg:block">
         {/* Anchored to the section rather than the grid column, so the
             photograph reads as one continuous field running off the right of
             the screen instead of a boxed-in image with a hard left seam. */}
@@ -127,13 +130,6 @@ export function Hero() {
           </div>
           </div>
         </div>
-      </div>
-
-      {/* ---------------- Service cards (below lg) ---------------- */}
-      <div className="gutter mt-12 flex flex-col gap-3 lg:hidden">
-        {services.map((s, i) => (
-          <ServiceCardMobile key={s.index} service={s} index={i} />
-        ))}
       </div>
 
       {/* Oversized wordmark set into the floor, as in the moodboard. Purely
