@@ -52,9 +52,9 @@ export function Hero() {
         </div>
 
         <div className="shell relative">
-          <div className="grid items-center gap-10 lg:grid-cols-[minmax(19rem,40%)_1fr] lg:gap-6 xl:gap-10">
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(19rem,38%)_1fr] lg:gap-6 xl:gap-8">
           {/* ---------------- Copy column ---------------- */}
-          <div className="relative z-10 lg:py-20 xl:py-24">
+          <div className="relative z-10 lg:py-16 xl:py-20">
             <Reveal immediate delay={0.15} y={14}>
               <p className="u-label text-ink/60">A new chapter begins.</p>
             </Reveal>
@@ -107,8 +107,8 @@ export function Hero() {
             className="relative hidden lg:block"
             style={{ marginRight: "calc(-1 * var(--spacing-gutter))" }}
           >
-            <div className="relative aspect-[16/13] w-full xl:aspect-[16/12]">
-              <div className="absolute -top-[5%] bottom-[-1%] left-[6%] right-0 flex gap-[1.3%]">
+            <div className="relative aspect-[16/11.5] w-full xl:aspect-[16/11]">
+              <div className="absolute inset-y-0 left-[-3%] right-0">
                 {services.map((s, i) => (
                   <HeroServicePanel
                     key={s.index}
