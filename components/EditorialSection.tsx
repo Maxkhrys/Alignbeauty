@@ -43,7 +43,7 @@ export function EditorialSection() {
               className="u-display max-w-[18ch] text-[length:var(--step-h3)] uppercase text-cream"
             />
             <Reveal delay={0.24} y={10}>
-              <p className="u-label mt-5 text-cream/70">Mayo &middot; Co. Mayo</p>
+              <p className="u-label mt-5 text-cream/70">Balla &middot; Co. Mayo</p>
             </Reveal>
           </div>
         </div>

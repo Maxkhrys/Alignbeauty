@@ -20,7 +20,7 @@ export const site = {
     phoneHref: "tel:+353871234567",
     email: "hello@alignbeautylounge.ie",
     emailHref: "mailto:hello@alignbeautylounge.ie",
-    address: "Mayo, Co. Mayo",
+    address: "Balla, Co. Mayo",
   },
 
   social: [
